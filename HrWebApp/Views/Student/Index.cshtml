@@ -1,0 +1,174 @@
+﻿@model HrWebApp.Models.CVitaeModel
+
+@{
+    ViewData["Title"] = "Student Profile Form";
+}
+<div class="body_container">
+    <h1>Complete your profile</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Index" asp-controller="Student" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row form_student_profile">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input asp-for="FirstName" class="form-control" id="floatingInputGrid" placeholder="Rakoto" />
+                            <label asp-for="FirstName" for="floatingInputGrid"></label>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                                <input asp-for="SurName" class="form-control" id="floatingInputGrid1" placeholder="Mihadja" />
+                                <label asp-for="SurName" for="floatingInputGrid1"></label>
+                                <span asp-validation-for="SurName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form_student_profile">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input asp-for="Email" class="form-control" id="floatingInputGrid2" placeholder="Email" />
+                            <label asp-for="Email" for="floatingInputGrid2"></label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input asp-for="PhoneNumber" class="form-control" id="floatingInputGrid3" placeholder="Phone number" />
+                            <label asp-for="PhoneNumber" for="floatingInputGrid3"></label>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form_student_profile">
+                    <div class="col-md">
+
+                        <div class="form-group">
+                            <label asp-for="Skills" class="control-label"></label>
+                            <select asp-for="Skills" asp-items="GetSkillOptions()" multiple class="js-example-basic-multiple form-select w-100"></select>
+                            <span asp-validation-for="Skills" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Education" class="control-label"></label>
+
+                            <select asp-for="Education" class="form-select attr-selected" aria-label="Default select example">
+                                @foreach(string education in new List<string>() { "Ingeneer", "Bachelor", "Master", "PHD"})
+                                {
+                                    <option value=@education>@education</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Education" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form_student_profile">
+                    <div class="col-md">
+
+                        <div class="form-group">
+                            <label asp-for="WorkExperience" class="control-label"></label>
+                            <input asp-for="WorkExperience" class="form-control" />
+                            <span asp-validation-for="WorkExperience" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NumberOfProjects" class="control-label"></label>
+                            <input asp-for="NumberOfProjects" class="form-control" />
+                            <span asp-validation-for="NumberOfProjects" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="GitHubProfile" class="control-label"></label>
+                            <input asp-for="GitHubProfile" class="form-control" />
+                            <span asp-validation-for="GitHubProfile" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_student_profile">
+                    <div class="col-md">
+                        <div class="form-group ">
+                            <label asp-for="Languages" class="control-label"></label>
+                            <select asp-for="Languages" asp-items="GetLanguageOptions()" multiple="multiple" class="js-example-basic-multiple form-select"></select>
+                            <span asp-validation-for="Languages" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_student_profile">
+                    <div class="col-md">
+                        <div class="form-group ">
+                            <label asp-for="AwardsAndHonors" class="control-label"></label>
+                            <textarea asp-for="AwardsAndHonors" cols="25" rows="3" class="form-control"></textarea>
+                            <span asp-validation-for="AwardsAndHonors" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_student_profile">
+                    <div class="col-md">
+                        <div class="form-group ">
+                            <label asp-for="Status" class="control-label"></label>
+                            <select asp-for="Status" asp-items="GetStatusOptions()" class="attr-selected form-select"></select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_student_profile_submit">
+                    <div class="col-md">
+                         <input type="submit" value="Save" class="btn btn-primary w-100" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@functions {
+    IEnumerable<SelectListItem> GetSkillOptions()
+    {
+        // You can provide a list of predefined skills here
+        return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "C#", Value = "C#" },
+                new SelectListItem { Text = "Java", Value = "Java" },
+                new SelectListItem { Text = "Python", Value = "Python" },
+                // Add more skills as needed
+            };
+    }
+
+    IEnumerable<SelectListItem> GetStatusOptions()
+    {
+        // You can provide a list of predefined skills here
+        return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "PHD", Value = "PHD" },
+                new SelectListItem { Text = "Master", Value = "Master" },
+                new SelectListItem { Text = "Professional Master", Value = "Professional Master" },
+                new SelectListItem { Text = "Bachelor", Value = "Bachelor" },
+                new SelectListItem { Text = "Some Courses", Value = "Some Courses" }
+                // Add more skills as needed
+            };
+    }
+
+    IEnumerable<SelectListItem> GetLanguageOptions()
+    {
+        // You can provide a list of predefined skills here
+        return new List<SelectListItem>
+            {
+                new SelectListItem { Text = "English", Value = "English" },
+                new SelectListItem { Text = "French", Value = "French" },
+                new SelectListItem { Text = "Russian", Value = "Russian" },
+                new SelectListItem { Text = "Chinese", Value = "chinese" },
+                new SelectListItem { Text = "Arab", Value = "Arab" },
+                new SelectListItem { Text = "Spanish", Value = "Spanish" },
+                new SelectListItem { Text = "Portuguese", Value = "Portuguese" },
+                new SelectListItem { Text = "Italian", Value = "Italian" },
+                new SelectListItem { Text = "German", Value = "German" }
+                // Add more skills as needed
+            };
+    }
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

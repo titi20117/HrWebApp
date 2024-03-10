@@ -1,0 +1,87 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+header .actor {
+    margin-left: 100px;
+}
+
+header .component {
+    margin-left: 100px;
+}
+
+.section-student_job, .section-student_company {
+    display: flex;
+}
+
+.section-student_job_content, .section-student_company_content {
+    margin: auto;
+}
+
+.section-student_job_content, .section-student_job_image, 
+.section-student_company_content, .section-student_company_image {
+    width: 50%;
+}
+
+.section-student_job_image .section-student_company_image {
+    width: 700px;
+    height: 500px;
+}
+
+.section-student_job_image img, .section-student_company_image img {
+    width: 100%;
+}
+
+.section-student_job_content a, .section-student_company_content a {
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.section-student_job_content p:nth-child(1) {
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+.section-student_company_content p:nth-child(1) {
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.section-student_job_content p:nth-child(2), .section-student_company_content p:nth-child(2) {
+    font-size: medium;
+    font-weight: bold;
+}
+.body_container {
+    background-color: #cdbebe;
+    padding: 0px 44px;
+    width: 100%;
+}
+.form_student_profile {
+    margin: 10px 0 10px 0;
+    width: 900px;
+}
+.form_student_profile_submit {
+    margin: 10px 0 10px 10px;
+    width: 200px;
+    cursor:pointer;
+}
+@media (min-width: 1200px) .container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 100%;
+}

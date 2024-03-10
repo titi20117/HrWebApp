@@ -1,0 +1,18 @@
+﻿@model HrWebApp.Models.LoginModel
+@*
+
+*@
+@{
+}
+<div class="mb-3 row">
+    <label asp-for="Mail" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+      <input asp-for="Mail" type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label asp-for="Password" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input asp-for="Password" type="password" class="form-control" id="inputPassword">
+    </div>
+  </div>
