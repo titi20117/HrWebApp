@@ -1,0 +1,51 @@
+﻿@using HrWebApp.Data;
+@model HrWebApp.Models.UserAccountModel
+
+@{
+    ViewData["Title"] = "UserAccount";
+}
+
+<h1>Create User Account</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UserAccount">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserEmail" class="control-label"></label>
+                <input asp-for="UserEmail" class="form-control" />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPassword" class="control-label"></label>
+                <input asp-for="UserPassword" class="form-control" type="password"/>
+                <span asp-validation-for="UserPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserConfirmationPassword" class="control-label"></label>
+                <input asp-for="UserConfirmationPassword" class="form-control" type="password" />
+                <span asp-validation-for="UserConfirmationPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserCategoryId" class="control-label"></label>
+                <Select asp-for="UserCategoryId" class="form-select" aria-label="Default select exampple" 
+                asp-items="@(new SelectList(Model.UserCategoryList, nameof(UserCategoryModel.Id), nameof(UserCategoryModel.Name)))">
+                    <option>Please select one</option>
+                </Select>
+                <span asp-validation-for="UserCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
