@@ -26,6 +26,22 @@ namespace HrWebApp.Controllers
             }
             return View(vm);
         }
+        [HttpPost]
+        public IActionResult CreateAccount(UserAccountModel user)
+        {
+            var vm = new UserAccountModel();
+            using (var ressource = new HrProjectContext())
+            {
+                var userAccount = new User();
+                userAccount.UserEmail = user.UserEmail;
+                userAccount.UserPassword = user.UserPassword;
+                userAccount.UserConfirmationPassword = user.UserConfirmationPassword;
+                userAccount.UserCategoryId = user.UserCategoryId;
+                ressource.Users.Add(userAccount);
+                ressource.SaveChanges();
+            }
+            return RedirectToAction("Index", "Home");
+        }
         
         [Route("/sign-in")]
         public IActionResult SignIn()
