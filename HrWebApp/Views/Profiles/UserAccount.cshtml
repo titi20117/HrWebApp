@@ -5,38 +5,42 @@
     ViewData["Title"] = "UserAccount";
 }
 
-<h1>Create User Account</h1>
-
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CreateAccount" asp-controller="Profiles" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserEmail" class="control-label"></label>
-                <input asp-for="UserEmail" class="form-control" />
-                <span asp-validation-for="UserEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserPassword" class="control-label"></label>
-                <input asp-for="UserPassword" class="form-control" type="password" id="pass" />
-                <span asp-validation-for="UserPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserConfirmationPassword" class="control-label"></label>
-                <input asp-for="UserConfirmationPassword" class="form-control" type="password" required id="confirm_pass" onkeyup="validate_password()" />
-                <span asp-validation-for="UserConfirmationPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserCategoryId" class="control-label"></label>
-                <Select asp-for="UserCategoryId" class="form-select" aria-label="Default select exampple" 
-                asp-items="@(new SelectList(Model.UserCategoryList, nameof(UserCategoryModel.Id), nameof(UserCategoryModel.Name)))">
-                    <option>Please select one</option>
-                </Select>
-                <span asp-validation-for="UserCategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" onclick="wrong_pass_alert()" />
+            <div class="card custom-card">
+                <div class="card-header bg-primary text-white">
+                    <h2>Registration Form</h2>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="UserEmail" class="control-label"></label>
+                        <input asp-for="UserEmail" class="form-control" />
+                        <span asp-validation-for="UserEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserPassword" class="control-label"></label>
+                        <input asp-for="UserPassword" class="form-control" type="password" id="pass" />
+                        <span asp-validation-for="UserPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserConfirmationPassword" class="control-label"></label>
+                        <input asp-for="UserConfirmationPassword" class="form-control" type="password" required id="confirm_pass" onkeyup="validate_password()" />
+                        <span asp-validation-for="UserConfirmationPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserCategoryId" class="control-label"></label>
+                        <Select asp-for="UserCategoryId" class="form-select" aria-label="Default select exampple" 
+                        asp-items="@(new SelectList(Model.UserCategoryList, nameof(UserCategoryModel.Id), nameof(UserCategoryModel.Name)))">
+                            <option>Please select one</option>
+                        </Select>
+                        <span asp-validation-for="UserCategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" onclick="wrong_pass_alert()" />
+                    </div>
+                </div>
             </div>
         </form>
     </div>

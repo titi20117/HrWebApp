@@ -4,13 +4,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", options =>
 {
     options.Cookie.Name = "MyCookieAuth";
+    options.LoginPath = "/sign-in";
     options.AccessDeniedPath = "/Home/Error";
 });
 
 builder.Services.AddAuthorization(options =>
 {
+    //grant to policy to allow only user who have student requirement
     options.AddPolicy("MustBelongToStudentProfile", 
         policy => policy.RequireClaim("UserCategory", "Student"));
+    //grant to policy to allow only user who have recruiter requirement
+    options.AddPolicy("RecruiterOnly",
+        policy => policy.RequireClaim("UserCategory", "Recruiter"));
 });
 // Add middlewares 
 builder.Services.AddControllersWithViews();
