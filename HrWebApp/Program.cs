@@ -1,6 +1,17 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", options =>
+{
+    options.Cookie.Name = "MyCookieAuth";
+    options.AccessDeniedPath = "/Home/Error";
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("MustBelongToStudentProfile", 
+        policy => policy.RequireClaim("UserCategory", "Student"));
+});
 // Add middlewares 
 builder.Services.AddControllersWithViews();
 
@@ -15,6 +26,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

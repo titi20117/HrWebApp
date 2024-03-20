@@ -1,6 +1,9 @@
 ﻿using HrWebApp.Data;
 using HrWebApp.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace HrWebApp.Controllers
 {
@@ -42,11 +45,53 @@ namespace HrWebApp.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        
+
         [Route("/sign-in")]
         public IActionResult SignIn()
         {
             return View();
+        }
+
+        private string getCategoryUser(int? id)
+        {
+            string category = "";
+            using (var context = new HrProjectContext())
+            {
+                category = (from cat in context.UserCategories
+                            where cat.UserCategoryId == id
+                            select cat.UserCategoryName).Single();
+            }
+            return category;
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateConnectionAsync(LoginModel loginVm)
+        {
+            if (!ModelState.IsValid) return RedirectToAction("SignIn", "Profiles");
+            using (var resource = new HrProjectContext())
+            {
+                var usersList = resource.Users.ToList();
+                foreach (var item in usersList)
+                {
+                    //verify the credential
+                    if (loginVm.Mail == item.UserEmail && loginVm.Password == item.UserPassword)
+                    {
+                        //Creating the security context
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Name, item.UserEmail),
+                            new Claim(ClaimTypes.Email, item.UserEmail),
+                            new Claim("UserCategory", getCategoryUser(item.UserCategoryId))
+                        };
+                        var identity = new ClaimsIdentity(claims, "MyCookieAuth");
+                        ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
+
+                        await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal);
+                        return RedirectToAction("Account", getCategoryUser(item.UserCategoryId));
+
+                    }
+                }
+            }
+            return RedirectToAction("SignIn", "Profiles");
         }
         [Route("/student/sign-up")]
         public IActionResult SignUpStudent()
@@ -79,11 +124,10 @@ namespace HrWebApp.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public async Task<IActionResult> LogoutAsync()
         {
-
-            return RedirectToAction("Student");
-            //return View();
+            await HttpContext.SignOutAsync("MyCookieAuth");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

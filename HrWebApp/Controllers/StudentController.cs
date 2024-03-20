@@ -1,20 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HrWebApp.Controllers
 {
+    [Authorize(Policy = "MustBelongToStudentProfile")]
     public class StudentController : Controller
     {
-        [Route("/Student/Index")]
-        public IActionResult Index()
+        [Route("/Student/Account")]
+        public IActionResult Account()
         {
             return View();
         }
 
-        public IActionResult CreateStudentPage()
+        public IActionResult ManageAccount()
         {
-            return View();
+            return RedirectToAction("Account", "Student");
         }
-        public IActionResult UpdateStudentPage()
+        public IActionResult UpdateAccount()
+        {
+            return RedirectToAction("Account", "Student");
+        }
+        public IActionResult DeleteAccount()
         {
             return View();
         }
