@@ -16,7 +16,7 @@ namespace HrWebApp.Controllers
         {
             return View();
         }
-
+        [HttpPost]
         public IActionResult CreateCompany()
         {
             return View();
@@ -27,6 +27,11 @@ namespace HrWebApp.Controllers
             return View();
         }
 
+        public IActionResult Job()
+        {
+            return View();
+        }
+        [HttpPost]
         public IActionResult CreateJob()
         {
             return View();

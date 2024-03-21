@@ -47,7 +47,7 @@ public partial class HrProjectContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=Desktop-26v0glf;Database=HrProject;Integrated Security=True;TrustServerCertificate=true");
+        => optionsBuilder.UseSqlServer("Server=Desktop-26v0glf; Database=HrProject; Integrated security = true; TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -144,7 +144,6 @@ public partial class HrProjectContext : DbContext
             entity.HasKey(e => e.EducationId).HasName("PK__Educatio__45C0CFE7BB847365");
 
             entity.Property(e => e.EducationId).HasColumnName("education_id");
-            entity.Property(e => e.EducationAverageScore).HasColumnName("education_averageScore");
             entity.Property(e => e.EducationName)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -277,6 +276,7 @@ public partial class HrProjectContext : DbContext
             entity.HasKey(e => e.StudentId).HasName("PK__Students__2A33069A9445901F");
 
             entity.Property(e => e.StudentId).HasColumnName("student_id");
+            entity.Property(e => e.EducationAverageScore).HasColumnName("education_averageScore");
             entity.Property(e => e.StudentAwardsHonors)
                 .HasMaxLength(3000)
                 .IsUnicode(false)

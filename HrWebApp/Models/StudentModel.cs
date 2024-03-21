@@ -2,7 +2,7 @@
 
 namespace HrWebApp.Models
 {
-    public class CVitaeModel
+    public class StudentModel
     {
         [Required]
         [MaxLength(50)]
@@ -11,7 +11,7 @@ namespace HrWebApp.Models
         [Required]
         [MaxLength(50)]
         [Display(Name = "Last Name")]
-        public string? SurName { get; set; }
+        public string? LastName { get; set; }
         [Required]
         [MaxLength(50)]
         [Display(Name = "Email Address")]

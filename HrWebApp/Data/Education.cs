@@ -9,7 +9,5 @@ public partial class Education
 
     public string EducationName { get; set; } = null!;
 
-    public double EducationAverageScore { get; set; }
-
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 }

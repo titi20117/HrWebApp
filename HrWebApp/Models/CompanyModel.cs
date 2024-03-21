@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HrWebApp.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace HrWebApp.Models
 {
@@ -8,15 +9,16 @@ namespace HrWebApp.Models
         public string CompanyRecruiterLastName { get; set; } = null!;
         [Display(Name = "Recruiter Email")]
         public int UserId { get; set; }
-        public string? Logo { get; set; }
         public string? CompanyName { get; set; }
-        public int? CompanySector { get; set; }
-        public int? CompanyType { get; set; }
+        public int CompanySectorId { get; set; }
+        public int CompanyTypeId { get; set; }
         public string CompanyPhone { get; set; } = null!;
         public int CompanyNumberOfEmployees { get; set; }
         public string? CompanyLocation { get; set; }
         public int CompanyDateOfCreation { get; set; }
         public string? CompanyDescription { get; set; }
         public string? CompanyUrl { get; set; }
+        public List<CompanySector>? CompanySectors { get; set; }
+        public List<CompanyType>? CompanyTypes { get; set; }
     }
 }

@@ -1,0 +1,108 @@
+﻿@using HrWebApp.Data;
+@model HrWebApp.Models.JobModel
+
+@{
+    ViewData["Title"] = "Job";
+}
+
+<h1>Create a job</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Job" asp-controller="Recruiter" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-2">
+                <label asp-for="CompanyId" class="control-label">Company Name</label>
+                <input asp-for="CompanyId" class="form-control" value=""/>
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            </div>
+            <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">
+                    Job Details
+                </legend>
+                <div class="form-group mb-2">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Responsibilities" class="control-label"></label>
+                    <input asp-for="Responsibilities" class="form-control" />
+                    <span asp-validation-for="Responsibilities" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Salary" class="control-label"></label>
+                    <input asp-for="Salary" class="form-control" />
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+            </fieldset>
+            <fieldset class="form-group border p-3">
+                <legend class="w-auto px-2">Requirements</legend>
+                <div class="form-group mb-2">
+                    <label asp-for="SkillId" class="control-label"></label>
+                    <select asp-for="SkillId" asp-items="@(new SelectList(Model.Skills, nameof(Skill.SkillId), nameof(Skill.SkillName)))"
+                    multiple class="form-select js-example-basic-multiple w-100">
+                        <option>
+                            Choose an option
+                        </option>
+                    </select>
+                    <input asp-for="Responsibilities" class="form-control" />
+                    <span asp-validation-for="Responsibilities" class="text-danger"></span>
+                </div>
+                <div class="row mb-2">
+                    <div class="form-group">
+                        <label asp-for="StudyLevelId" class="control-label"></label>
+                        <Select asp-for="StudyLevelId" asp-items="@(new SelectList(Model.StudyLevels, nameof(Education.EducationId), nameof(Education.EducationName)))">
+                            <option>
+                                Please select one
+                            </option>
+                        </Select>
+                        <span asp-validation-for="StudyLevelId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WorkingExperience" class="control-label"></label>
+                        <input asp-for="WorkingExperience" class="form-control" />
+                        <span asp-validation-for="WorkingExperience" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WorkingHours" class="control-label"></label>
+                        <input asp-for="WorkingHours" class="form-control" />
+                        <span asp-validation-for="WorkingHours" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContractId" class="control-label"></label>
+                    <Select asp-for="ContractId" asp-items="@(new SelectList(Model.Contracts, nameof(Contract.ContractId), nameof(Contract.ContractTitle)))">
+                        <option>
+                            Please select one
+                        </option>
+                    </Select>
+                    <span asp-validation-for="ContractId" class="text-danger"></span>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PublicationDate" class="control-label"></label>
+                <input asp-for="PublicationDate" class="form-control" />
+                <span asp-validation-for="PublicationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
