@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mb-2">
                 <label asp-for="CompanyId" class="control-label">Company Name</label>
-                <input asp-for="CompanyId" class="form-control" value=""/>
+                <input asp-for="CompanyId" class="form-control" value="@Model.CompanyId"/>
                 <span asp-validation-for="CompanyId" class="text-danger"></span>
             </div>
             <fieldset class="form-group border p-3">
@@ -86,11 +86,6 @@
                     <span asp-validation-for="ContractId" class="text-danger"></span>
                 </div>
             </fieldset>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="PublicationDate" class="control-label"></label>
                 <input asp-for="PublicationDate" class="form-control" />

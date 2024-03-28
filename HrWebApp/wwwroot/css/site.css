@@ -85,3 +85,16 @@ header .component {
 @media (min-width: 1200px) .container, .container-lg, .container-md, .container-sm, .container-xl {
     max-width: 100%;
 }
+
+.companies-content {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.companies-content_element {
+    margin: 20px;
+    width: 400px;
+}
+.companies-content_element_footer::before {
+    content: "\f170";
+}

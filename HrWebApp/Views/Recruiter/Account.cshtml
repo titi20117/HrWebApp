@@ -1,0 +1,52 @@
+﻿@model HrWebApp.Models.CompanyRecruiterModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="recruiter-company">
+    <div class="recruiter-company_header">
+        <div class="recruiter-company_header_title">
+            <div>
+                <h2>@Model.Name</h2>
+            </div>
+            <div><a class="btn btn-secondary" href="@Model.Url">Visit the website</a></div>
+        </div>
+        <div class="recruiter-company_header_description">
+            <div>
+                <div>Company type <br /> <b>@Model.Type</b></div>
+            </div>
+            <div>
+                <div>Sector <br /> <b>@Model.Sector</b></div>
+            </div>
+            <div>
+                <div>Location <br /> <b>@Model.Location</b></div>
+            </div>
+        </div>
+    </div>
+    <div class="recruiter-company_body">
+
+        <div class="recruiter-company_body_description">
+            @Model.Description
+        </div>
+        <div class="recruiter-company_body_jobs">
+            <div class="recruiter-company_body_jobs">
+
+            </div>
+        </div>
+    </div>
+    <div class="recruiter-company_footer">
+        <div></div>
+    </div>
+</div>   
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+@if (Model.JobCount == 0)
+{
+    <div>
+        <a asp-action="FormJob" asp-controller="Recruiter" class="btn btn-success"> Create Job Alert</a>
+    </div>
+}

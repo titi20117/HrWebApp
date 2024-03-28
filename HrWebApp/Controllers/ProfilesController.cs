@@ -2,7 +2,6 @@
 using HrWebApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace HrWebApp.Controllers
@@ -32,7 +31,6 @@ namespace HrWebApp.Controllers
         [HttpPost]
         public IActionResult CreateAccount(UserAccountModel user)
         {
-            var vm = new UserAccountModel();
             using (var ressource = new HrProjectContext())
             {
                 var userAccount = new User();

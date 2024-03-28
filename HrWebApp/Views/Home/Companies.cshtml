@@ -1,0 +1,27 @@
+﻿@model HrWebApp.Models.GetCompanyModel
+
+@{
+    ViewData["Title"] = "Companies";
+}
+
+<div class="companies-content">
+    @foreach (var company in Model.Companies)
+    {
+        <div class="card text-white bg-success mb-3 companies-content_element" style="max-width: 20rem;">
+            <div class="card-header"><h2>@company.Name</h2></div>
+            <div class="card-body ml-3">
+                <div><span>@company.Name</span></div>
+                <div style="opacity: 0.5;">
+                    <span>@company.Type - </span>
+                    <span>@company.EmployeesCount employees</span>
+                    
+                </div>
+            </div>
+            <div class="card-footer companies-content_element_footer">
+                <a asp-action="CompanyPage" asp-controller="Home" class="btn btn-dark">
+                    See our job vacancies
+                </a>
+            </div>
+        </div>
+    }
+</div>

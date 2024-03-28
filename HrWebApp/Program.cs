@@ -16,6 +16,9 @@ builder.Services.AddAuthorization(options =>
     //grant to policy to allow only user who have recruiter requirement
     options.AddPolicy("RecruiterOnly",
         policy => policy.RequireClaim("UserCategory", "Recruiter"));
+
+    options.AddPolicy("RecruiterAndStudentOnly",
+        policy => policy.RequireClaim("UserCategory", "Recruiter").RequireClaim("UserCategory", "Recruiter"));
 });
 // Add middlewares 
 builder.Services.AddControllersWithViews();
