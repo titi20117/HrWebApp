@@ -50,7 +50,7 @@ namespace HrWebApp.Controllers
             return View();
         }
 
-        private string getCategoryUser(int? id)
+        public static string getCategoryUser(int? id)
         {
             string category = "";
             using (var context = new HrProjectContext())

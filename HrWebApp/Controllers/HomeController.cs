@@ -18,6 +18,25 @@ namespace HrWebApp.Controllers
         }
         public IActionResult Index()
         {
+            int id = 0;
+            string userCategory = "";
+            using (var resource = new HrProjectContext())
+            {
+                var el = (from u in resource.Users
+                          join cat in resource.UserCategories on u.UserCategoryId equals cat.UserCategoryId
+                          select new
+                          {
+                              Id = u.UserId,
+                              Name = u.UserEmail,
+                              UserCategoryName = cat.UserCategoryName
+                          }).FirstOrDefault(u => u.Name == User.Identity.Name);
+                id = el.Id;
+                userCategory = el.UserCategoryName;
+            }
+            if (userCategory.ToLower() == "recruiter")
+            {
+                return RedirectToAction("Account", "Recruiter");
+            }
             return View();
         }
         public IActionResult Recruiter()

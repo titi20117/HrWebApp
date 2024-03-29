@@ -1,7 +1,7 @@
 ﻿
 @if(User.Identity.IsAuthenticated) {
     <form method="post" class="form-inline" asp-controller="Profiles" asp-action="Logout">
-        <div class="flex-grow-1">
+        <div class="flex-grow-1 profile-login">
             <span>Welcome @User.Identity.Name</span>
             <button type="submit" class="ml-2 btn btn-link">Logout</button>
         </div>

@@ -15,7 +15,7 @@ namespace HrWebApp.Models
         [Required]
         public string? Responsibilities { get; set; }
         [Required]
-        public int SkillId { get; set; }
+        public List<int>? IdSkills { get; set; }
         [Display(Name = "Study Level")]
         [Required]
         public int StudyLevelId { get; set; }

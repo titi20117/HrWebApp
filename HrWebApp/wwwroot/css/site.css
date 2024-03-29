@@ -17,6 +17,11 @@ body {
   margin-bottom: 60px;
 }
 
+.profile-login {
+    position: relative;
+    top: 3px;
+}
+
 header .actor {
     margin-left: 100px;
 }
@@ -97,4 +102,23 @@ header .component {
 }
 .companies-content_element_footer::before {
     content: "\f170";
+    font-family: "Bootstrap-icons";
+}
+
+.recruiter-formJob{
+    width:100%;
+}
+
+.recruiter-formJob_companyName {
+
+}
+
+.recruiter-formJob_jobDetails, .recruiter-formJob_jobRequirements {
+    border: 1px solid blue !important;
+    margin-bottom: 10px;
+}
+
+fieldset legend {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }

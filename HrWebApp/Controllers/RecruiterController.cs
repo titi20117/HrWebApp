@@ -50,20 +50,20 @@ namespace HrWebApp.Controllers
                               };
 
                 var myCompany = (from c in resource.Companies
-                           join t in resource.CompanyTypes on c.CompanyTypeId equals t.CompanyTypeId
-                           join s in resource.CompanySectors on c.CompanySectorId equals s.CompanySectorId
-                           join u in resource.Users on c.UserId equals u.UserId
-                            select new
-                           {
-                               Name = c.CompanyName,
-                               Url = c.CompanyUrl,
-                               Type = t.CompanyTypeName,
-                               Sector = s.CompanySectorName,
-                               Location = c.CompanyLocation,
-                               Description = c.CompanyDescription,
-                               NbrEmplyee = c.CompanyNumberOfEmployees,
-                               UserName = u.UserEmail
-                           }).FirstOrDefault(c => c.UserName == User.Identity.Name);
+                                 join t in resource.CompanyTypes on c.CompanyTypeId equals t.CompanyTypeId
+                                 join s in resource.CompanySectors on c.CompanySectorId equals s.CompanySectorId
+                                 join u in resource.Users on c.UserId equals u.UserId
+                                 select new
+                                 {
+                                     Name = c.CompanyName,
+                                     Url = c.CompanyUrl,
+                                     Type = t.CompanyTypeName,
+                                     Sector = s.CompanySectorName,
+                                     Location = c.CompanyLocation,
+                                     Description = c.CompanyDescription,
+                                     NbrEmplyee = c.CompanyNumberOfEmployees,
+                                     UserName = u.UserEmail
+                                 }).FirstOrDefault(c => c.UserName == User.Identity.Name);
 
                 vm.Name = myCompany.Name;
                 vm.Url = myCompany.Url;
