@@ -1,0 +1,21 @@
+﻿@model HrWebApp.Models.GetJobModel
+
+@{
+    ViewData["Title"] = "Jobs";
+}
+
+<div class="recruiter-company_body_jobs">
+    @foreach (var item in Model.Jobs)
+    {
+        <div class="recruiter-company_body_jobs_element">
+            <h3>@item.CompanyName</h3>
+            <h4>@item.JobTitle</h4>
+            <div>
+                <div><span>@item.JobContract</span></div>
+                <div><span>@item.JobLocation</span></div>
+            </div>
+            <div><span>@item.PublicationTime</span></div>
+        </div>
+
+    }
+</div>

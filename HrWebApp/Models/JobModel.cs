@@ -22,14 +22,15 @@ namespace HrWebApp.Models
         [Display(Name = "Working Experience")]
         [Required]
         public int WorkingExperience { get; set; }
-        [Display(Name = "Working Hours")]
+        [Display(Name = "Working Hours (../week)")]
         public int WorkingHours { get; set; }
 
         [Display(Name = "Contract Name")]
         public int ContractId { get; set; }
         [Required]
+        [Display(Name = "Salary (..$/h)")]
         public decimal Salary { get; set; }
-        [Display(Name = "Additional Informations")]
+        [Display(Name = "Job Description")]
         [Required]
         public string? Description { get; set; }
         [Display(Name = "Publication Date")]

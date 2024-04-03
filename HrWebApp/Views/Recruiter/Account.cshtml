@@ -31,9 +31,19 @@
             @Model.Description
         </div>
         <div class="recruiter-company_body_jobs">
-            <div class="recruiter-company_body_jobs">
-
-            </div>
+            @foreach(var item in Model.Jobs)
+            {
+                <div class="recruiter-company_body_jobs_element">
+                    <h3>@item.CompanyName</h3>
+                    <h4>@item.JobTitle</h4>
+                    <div>
+                        <div><span>@item.JobContract</span></div>
+                        <div><span>@item.JobLocation</span></div>
+                    </div>
+                    <div><span>@item.PublicationTime</span></div>
+                </div>
+                
+            }
         </div>
     </div>
     <div class="recruiter-company_footer">
@@ -44,7 +54,7 @@
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
-@if (Model.JobCount == 0)
+@if (Model.JobCount >= 0)
 {
     <div>
         <a asp-action="FormJob" asp-controller="Recruiter" class="btn btn-success"> Create Job Alert</a>

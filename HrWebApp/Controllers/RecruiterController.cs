@@ -13,6 +13,7 @@ namespace HrWebApp.Controllers
         public IActionResult Account()
         {
             CompanyRecruiterModel vm = new CompanyRecruiterModel();
+            vm.Jobs = new List<GetJobModel>();
             using (var resource = new HrProjectContext())
             {
                 var items = resource.Companies.ToList();
@@ -39,12 +40,14 @@ namespace HrWebApp.Controllers
                 }
 
                 var jobList = from j in resource.Vacancies
-                              where j.Company.User.UserEmail == User.Identity.Name
+                              join c in resource.Companies on j.CompanyId equals c.CompanyId
+                              join contrat in resource.Contracts on j.ContractId equals contrat.ContractId
+                              where c.CompanyId == GetCompanyId(GetCompanyNameByUserMail(User.Identity.Name))
                               select new
                               {
-                                  CompanyName = j.Company.CompanyName,
+                                  CompanyName = c.CompanyName,
                                   JobTitle = j.Title,
-                                  JobContract = j.Contract,
+                                  JobContract = contrat.ContractTitle,
                                   JobLocation = j.Company.CompanyLocation,
                                   PublicationTime = j.PublicationDate
                               };
@@ -72,6 +75,16 @@ namespace HrWebApp.Controllers
                 vm.Location = myCompany.Location;
                 vm.Description = myCompany.Description;
                 vm.JobCount = jobList.Count();
+                foreach (var item in jobList)
+                {
+                    GetJobModel jm = new GetJobModel();
+                    jm.CompanyName = item.CompanyName;
+                    jm.JobTitle = item.JobTitle;
+                    jm.JobContract = item.JobContract;
+                    jm.JobLocation = item.JobLocation;
+                    jm.PublicationTime = item.PublicationTime;
+                    vm.Jobs.Add(jm);
+                }
 
             }
             return View(vm);
@@ -181,15 +194,56 @@ namespace HrWebApp.Controllers
             }
             return View(vm);
         }
+
+        private int GetCompanyId(string name)
+        {
+            int companyId = 0;
+            using (var resource = new HrProjectContext())
+            {
+                var company = (from c in resource.Companies
+                               select new
+                               {
+                                   Id = c.CompanyId,
+                                   Name = c.CompanyName
+                               }).FirstOrDefault(c => c.Name == name);
+                companyId = company.Id;
+            }
+            return companyId;
+        }
+
         [HttpPost]
         public IActionResult CreateJob(JobModel vm)
         {
             vm.Vacancies = new List<Vacancy>();
             using (var resource = new HrProjectContext())
             {
+                Vacancy vacancy = new Vacancy();
+                vacancy.CompanyId = GetCompanyId(vm.CompanyId);
+                vacancy.Title = vm.Title;
+                vacancy.Responsibilities = vm.Responsibilities;
+                vacancy.StudyLevelId = vm.StudyLevelId;
+                vacancy.WorkingExperience = vm.WorkingExperience;
+                vacancy.WorkingHours = vm.WorkingHours;
+                vacancy.ContractId = vm.ContractId;
+                vacancy.Salary = vm.Salary;
+                vacancy.VacancyDescription = vm.Description;
+                vacancy.PublicationDate = vm.PublicationDate;
 
+                resource.Vacancies.Add(vacancy);
+                resource.SaveChanges();
+
+
+                int currentJobsInTheDatabase = resource.Vacancies.ToList().Count;
+                foreach (var item in vm.IdSkills)
+                {
+                    var vacSkills = new VacanciesSkill();
+                    vacSkills.VacancyId = currentJobsInTheDatabase;
+                    vacSkills.SkillId = item;
+                    resource.VacanciesSkills.Add(vacSkills);
+                }
+                resource.SaveChanges();
             }
-            return View();
+            return RedirectToAction("Account", "Recuiter");
         }
 
         public IActionResult UpdateJob()

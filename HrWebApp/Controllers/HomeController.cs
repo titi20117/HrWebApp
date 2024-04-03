@@ -76,7 +76,33 @@ namespace HrWebApp.Controllers
         }
         public IActionResult Jobs()
         {
-            return View();
+            var vm = new GetJobModel();
+            vm.Jobs = new List<GetJobModel>();
+            using (var resource = new HrProjectContext())
+            {
+                var jobList = from j in resource.Vacancies
+                              join c in resource.Companies on j.CompanyId equals c.CompanyId
+                              join t in  resource.Contracts on j.ContractId equals t.ContractId
+                               select new
+                               {
+                                   CompanyName = c.CompanyName,
+                                   JobTitle = j.Title,
+                                   JobContract = t.ContractTitle,
+                                   JobLocation = c.CompanyLocation,
+                                   DatePublication = j.PublicationDate
+                               };
+                foreach (var job in jobList)
+                {
+                    var vm1 = new GetJobModel();
+                    vm1.CompanyName = job.CompanyName;
+                    vm1.JobTitle = job.JobTitle;
+                    vm1.JobContract = job.JobContract;
+                    vm1.JobLocation = job.JobLocation;
+                    vm1.PublicationTime = job.DatePublication;
+                    vm.Jobs.Add(vm1);
+                }
+            }
+            return View(vm);
         }
         public IActionResult Privacy()
         {
