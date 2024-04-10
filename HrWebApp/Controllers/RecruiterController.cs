@@ -1,4 +1,5 @@
 ﻿using HrWebApp.Data;
+using HrWebApp.HrMethod;
 using HrWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,9 @@ namespace HrWebApp.Controllers
             {
                 var items = resource.Companies.ToList();
                 bool temp = false;
-                if (items.Count() != 0)
+                if (items.Count != 0)
                 {
-                    int userId = GetUserId(User.Identity.Name);
+                    int userId = FromData.GetUserId(User.Identity.Name);
                     foreach (var item in items)
                     {
                         if (item.UserId == userId)
@@ -113,17 +114,6 @@ namespace HrWebApp.Controllers
             }
             return View(vm);
         }
-        private int GetUserId(string userMail)
-        {
-            int userId = 0;
-            using (var resource = new HrProjectContext())
-            {
-                userId = (from element in resource.Users
-                          where element.UserEmail == userMail
-                          select element.UserId).Single();
-            }
-            return userId;
-        }
 
         [HttpPost]
         public IActionResult CreateCompany(CompanyModel vm)
@@ -142,7 +132,7 @@ namespace HrWebApp.Controllers
                 company.CompanyRecruiterFirstName = vm.CompanyRecruiterFirstName;
                 company.CompanyRecruiterLastName = vm.CompanyRecruiterLastName;
                 company.CompanyPhone = vm.CompanyPhone;
-                company.UserId = GetUserId(vm.UserMail);
+                company.UserId = FromData.GetUserId(vm.UserMail);
 
                 resource.Companies.Add(company);
                 resource.SaveChanges();
@@ -161,7 +151,7 @@ namespace HrWebApp.Controllers
             using (var resource = new HrProjectContext())
             {
                 companyName = (from element in resource.Companies
-                               where element.UserId == GetUserId(userMail)
+                               where element.UserId == FromData.GetUserId(userMail)
                                select element.CompanyName).Single();
             }
             return companyName;
@@ -228,22 +218,19 @@ namespace HrWebApp.Controllers
                 vacancy.Salary = vm.Salary;
                 vacancy.VacancyDescription = vm.Description;
                 vacancy.PublicationDate = vm.PublicationDate;
-
                 resource.Vacancies.Add(vacancy);
                 resource.SaveChanges();
 
-
-                int currentJobsInTheDatabase = resource.Vacancies.ToList().Count;
+                resource.Vacancies.Attach(vacancy);
                 foreach (var item in vm.IdSkills)
                 {
-                    var vacSkills = new VacanciesSkill();
-                    vacSkills.VacancyId = currentJobsInTheDatabase;
-                    vacSkills.SkillId = item;
-                    resource.VacanciesSkills.Add(vacSkills);
+                    Skill skill = new Skill { SkillId = item };
+                    resource.Skills.Attach(skill);
+                    vacancy.Skills.Add(skill);
                 }
                 resource.SaveChanges();
             }
-            return RedirectToAction("Account", "Recuiter");
+            return RedirectToAction("Account", "Recruiter");
         }
 
         public IActionResult UpdateJob()

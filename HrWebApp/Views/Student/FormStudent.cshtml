@@ -1,0 +1,144 @@
+﻿@using HrWebApp.Data;
+@model HrWebApp.Models.StudentModel
+
+@{
+    ViewData["Title"] = "Student Profile Form";
+}
+<div class="body_container">
+    <h1>Complete your profile</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="ManageAccount" asp-controller="Student" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row form_student_profile">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input asp-for="FirstName" class="form-control" id="floatingInputGrid" placeholder="Rakoto" />
+                            <label asp-for="FirstName" for="floatingInputGrid"></label>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                                <input asp-for="LastName" class="form-control" id="floatingInputGrid1" placeholder="Mihadja" />
+                                <label asp-for="LastName" for="floatingInputGrid1"></label>
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form_student_profile">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input asp-for="UserMail" class="form-control" id="floatingInputGrid2" value="@User.Identity.Name" />
+                            <label asp-for="UserMail" for="floatingInputGrid2"></label>
+                            <span asp-validation-for="UserMail" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input asp-for="PhoneNumber" class="form-control" id="floatingInputGrid3" placeholder="Phone number" />
+                            <label asp-for="PhoneNumber" for="floatingInputGrid3"></label>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form_student_profile">
+                    <div class="col-md">
+
+                        <div class="form-group">
+                            <label asp-for="SkillsId" class="control-label"></label>
+                            <select asp-for="SkillsId" asp-items="@(new SelectList(Model.Skills, nameof(Skill.SkillId), nameof(Skill.SkillName)))" multiple class="js-example-basic-multiple form-select w-100">
+                                <option>
+                                    Choose an option
+                                </option>
+                            </select>
+                            
+                            <span asp-validation-for="SkillsId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EducationsId" class="control-label"></label>
+
+                            <select asp-for="EducationsId" asp-items="@(new SelectList(Model.Educations, nameof(Education.EducationId), nameof(Education.EducationName)))" multiple class="js-example-basic-multiple form-select w-100">
+                                <option>
+                                    Choose an option
+                                </option>
+                            </select>
+                            <span asp-validation-for="EducationsId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EducationAverageScore" class="control-label"></label>
+                            <input asp-for="EducationAverageScore" class="form-control" />
+                            <span asp-validation-for="EducationAverageScore" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form_student_profile">
+                    <div class="col-md">
+
+                        <div class="form-group">
+                            <label asp-for="WorkExperience" class="control-label"></label>
+                            <input asp-for="WorkExperience" class="form-control" />
+                            <span asp-validation-for="WorkExperience" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NumberOfProjects" class="control-label"></label>
+                            <input asp-for="NumberOfProjects" class="form-control" />
+                            <span asp-validation-for="NumberOfProjects" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="GitHubProfile" class="control-label"></label>
+                            <input asp-for="GitHubProfile" class="form-control" />
+                            <span asp-validation-for="GitHubProfile" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_student_profile">
+                    <div class="col-md">
+                        <div class="form-group ">
+                            <label asp-for="Languages" class="control-label"></label>
+                            <select asp-for="Languages" asp-items="@(new SelectList(Model.Languages, nameof(Language.LanguageId), nameof(Language.LanguageName)))" multiple class="js-example-basic-multiple form-select">
+                                <option>
+                                    Choose an option
+                                </option>
+                            </select>
+                            <span asp-validation-for="Languages" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_student_profile">
+                    <div class="col-md">
+                        <div class="form-group ">
+                            <label asp-for="AwardsAndHonors" class="control-label"></label>
+                            <textarea asp-for="AwardsAndHonors" cols="25" rows="3" class="form-control"></textarea>
+                            <span asp-validation-for="AwardsAndHonors" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_student_profile">
+                    <div class="col-md">
+                        <div class="form-group ">
+                            <label asp-for="StatutId" class="control-label"></label>
+                            <select asp-for="StatutId" asp-items="@(new SelectList(Model.Status, nameof(StudentStatus.StudentStatusId), nameof(StudentStatus.StudentStatusName)))" class="attr-selected form-select">
+                                <option>
+                                    Choose an option
+                                </option>
+                            </select>
+                            <span asp-validation-for="StatutId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form_student_profile_submit">
+                    <div class="col-md">
+                         <input type="submit" value="Save" class="btn btn-primary w-100" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
