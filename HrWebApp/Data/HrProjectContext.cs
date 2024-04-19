@@ -166,96 +166,33 @@ public partial class HrProjectContext : DbContext
             entity.HasKey(e => e.PersonalityTestId).HasName("PK__Personal__258BC9E88C061A76");
 
             entity.Property(e => e.PersonalityTestId).HasColumnName("personalityTest_id");
-            entity.Property(e => e.PersonalityTestQuestion1)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question1");
-            entity.Property(e => e.PersonalityTestQuestion10)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question10");
-            entity.Property(e => e.PersonalityTestQuestion11)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question11");
-            entity.Property(e => e.PersonalityTestQuestion12)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question12");
-            entity.Property(e => e.PersonalityTestQuestion13)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question13");
-            entity.Property(e => e.PersonalityTestQuestion14)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question14");
-            entity.Property(e => e.PersonalityTestQuestion15)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question15");
-            entity.Property(e => e.PersonalityTestQuestion16)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question16");
-            entity.Property(e => e.PersonalityTestQuestion17)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question17");
-            entity.Property(e => e.PersonalityTestQuestion18)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question18");
-            entity.Property(e => e.PersonalityTestQuestion19)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question19");
-            entity.Property(e => e.PersonalityTestQuestion2)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question2");
-            entity.Property(e => e.PersonalityTestQuestion20)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question20");
-            entity.Property(e => e.PersonalityTestQuestion21)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question21");
-            entity.Property(e => e.PersonalityTestQuestion3)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question3");
-            entity.Property(e => e.PersonalityTestQuestion4)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question4");
-            entity.Property(e => e.PersonalityTestQuestion5)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question5");
-            entity.Property(e => e.PersonalityTestQuestion6)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question6");
-            entity.Property(e => e.PersonalityTestQuestion7)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question7");
-            entity.Property(e => e.PersonalityTestQuestion8)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question8");
-            entity.Property(e => e.PersonalityTestQuestion9)
-                .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("personalityTest_question9");
+            entity.Property(e => e.PersonalityTestQuestion1).HasColumnName("personalityTest_question1");
+            entity.Property(e => e.PersonalityTestQuestion10).HasColumnName("personalityTest_question10");
+            entity.Property(e => e.PersonalityTestQuestion11).HasColumnName("personalityTest_question11");
+            entity.Property(e => e.PersonalityTestQuestion12).HasColumnName("personalityTest_question12");
+            entity.Property(e => e.PersonalityTestQuestion13).HasColumnName("personalityTest_question13");
+            entity.Property(e => e.PersonalityTestQuestion14).HasColumnName("personalityTest_question14");
+            entity.Property(e => e.PersonalityTestQuestion15).HasColumnName("personalityTest_question15");
+            entity.Property(e => e.PersonalityTestQuestion16).HasColumnName("personalityTest_question16");
+            entity.Property(e => e.PersonalityTestQuestion17).HasColumnName("personalityTest_question17");
+            entity.Property(e => e.PersonalityTestQuestion18).HasColumnName("personalityTest_question18");
+            entity.Property(e => e.PersonalityTestQuestion19).HasColumnName("personalityTest_question19");
+            entity.Property(e => e.PersonalityTestQuestion2).HasColumnName("personalityTest_question2");
+            entity.Property(e => e.PersonalityTestQuestion20).HasColumnName("personalityTest_question20");
+            entity.Property(e => e.PersonalityTestQuestion21).HasColumnName("personalityTest_question21");
+            entity.Property(e => e.PersonalityTestQuestion3).HasColumnName("personalityTest_question3");
+            entity.Property(e => e.PersonalityTestQuestion4).HasColumnName("personalityTest_question4");
+            entity.Property(e => e.PersonalityTestQuestion5).HasColumnName("personalityTest_question5");
+            entity.Property(e => e.PersonalityTestQuestion6).HasColumnName("personalityTest_question6");
+            entity.Property(e => e.PersonalityTestQuestion7).HasColumnName("personalityTest_question7");
+            entity.Property(e => e.PersonalityTestQuestion8).HasColumnName("personalityTest_question8");
+            entity.Property(e => e.PersonalityTestQuestion9).HasColumnName("personalityTest_question9");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.User).WithMany(p => p.PersonalityTests)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_StudentPersonalityTest");
+                .HasConstraintName("FK_UserPersonalityTest");
         });
 
         modelBuilder.Entity<Skill>(entity =>

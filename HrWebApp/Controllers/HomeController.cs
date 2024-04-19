@@ -47,8 +47,7 @@ namespace HrWebApp.Controllers
         public IActionResult Companies()
         {
             GetCompanyModel vm = new GetCompanyModel();
-            var resource = new HrProjectContext();
-            using (resource)
+            using (var resource = new HrProjectContext())
             {
                 vm.Companies = new List<GetCompanyModel>();
                 var list = from c in resource.Companies

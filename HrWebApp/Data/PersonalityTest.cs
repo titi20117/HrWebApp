@@ -9,47 +9,47 @@ public partial class PersonalityTest
 
     public int UserId { get; set; }
 
-    public string PersonalityTestQuestion1 { get; set; } = null!;
+    public int? PersonalityTestQuestion1 { get; set; }
 
-    public string PersonalityTestQuestion2 { get; set; } = null!;
+    public int? PersonalityTestQuestion2 { get; set; }
 
-    public string PersonalityTestQuestion3 { get; set; } = null!;
+    public int? PersonalityTestQuestion3 { get; set; }
 
-    public string PersonalityTestQuestion4 { get; set; } = null!;
+    public int? PersonalityTestQuestion4 { get; set; }
 
-    public string PersonalityTestQuestion5 { get; set; } = null!;
+    public int? PersonalityTestQuestion5 { get; set; }
 
-    public string PersonalityTestQuestion6 { get; set; } = null!;
+    public int? PersonalityTestQuestion6 { get; set; }
 
-    public string PersonalityTestQuestion7 { get; set; } = null!;
+    public int? PersonalityTestQuestion7 { get; set; }
 
-    public string PersonalityTestQuestion8 { get; set; } = null!;
+    public int? PersonalityTestQuestion8 { get; set; }
 
-    public string PersonalityTestQuestion9 { get; set; } = null!;
+    public int? PersonalityTestQuestion9 { get; set; }
 
-    public string PersonalityTestQuestion10 { get; set; } = null!;
+    public int? PersonalityTestQuestion10 { get; set; }
 
-    public string PersonalityTestQuestion11 { get; set; } = null!;
+    public int? PersonalityTestQuestion11 { get; set; }
 
-    public string PersonalityTestQuestion12 { get; set; } = null!;
+    public int? PersonalityTestQuestion12 { get; set; }
 
-    public string PersonalityTestQuestion13 { get; set; } = null!;
+    public int? PersonalityTestQuestion13 { get; set; }
 
-    public string PersonalityTestQuestion14 { get; set; } = null!;
+    public int? PersonalityTestQuestion14 { get; set; }
 
-    public string PersonalityTestQuestion15 { get; set; } = null!;
+    public int? PersonalityTestQuestion15 { get; set; }
 
-    public string PersonalityTestQuestion16 { get; set; } = null!;
+    public int? PersonalityTestQuestion16 { get; set; }
 
-    public string PersonalityTestQuestion17 { get; set; } = null!;
+    public int? PersonalityTestQuestion17 { get; set; }
 
-    public string PersonalityTestQuestion18 { get; set; } = null!;
+    public int? PersonalityTestQuestion18 { get; set; }
 
-    public string PersonalityTestQuestion19 { get; set; } = null!;
+    public int? PersonalityTestQuestion19 { get; set; }
 
-    public string PersonalityTestQuestion20 { get; set; } = null!;
+    public int? PersonalityTestQuestion20 { get; set; }
 
-    public string PersonalityTestQuestion21 { get; set; } = null!;
+    public int? PersonalityTestQuestion21 { get; set; }
 
-    public virtual Student User { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

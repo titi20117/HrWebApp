@@ -1,0 +1,129 @@
+﻿@model HrWebApp.Models.PersonalityTestModel
+
+@{
+    ViewData["Title"] = "Test";
+}
+
+<h1>Personality Test</h1>
+
+<h4>Below are 21 questions designed to assess various personality traits,<br/>
+    Assign scores on a scale from 1 to 5 for each question, <br />
+    where 1 represents strongly disagree and 5 represents strongly agree.
+</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 w-75">
+        <form asp-action="ValidTest" asp-controller="Student" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Question1" class="control-label"></label>
+                <input asp-for="Question1" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question2" class="control-label"></label>
+                <input asp-for="Question2" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question3" class="control-label"></label>
+                <input asp-for="Question3" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question4" class="control-label"></label>
+                <input asp-for="Question4" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question5" class="control-label"></label>
+                <input asp-for="Question5" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question6" class="control-label"></label>
+                <input asp-for="Question6" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question6" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question7" class="control-label"></label>
+                <input asp-for="Question7" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question7" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question8" class="control-label"></label>
+                <input asp-for="Question8" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question8" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question9" class="control-label"></label>
+                <input asp-for="Question9" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question9" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question10" class="control-label"></label>
+                <input asp-for="Question10" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question10" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question11" class="control-label"></label>
+                <input asp-for="Question11" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question11" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question12" class="control-label"></label>
+                <input asp-for="Question12" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question12" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question13" class="control-label"></label>
+                <input asp-for="Question13" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question13" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question14" class="control-label"></label>
+                <input asp-for="Question14" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question14" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question15" class="control-label"></label>
+                <input asp-for="Question15" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question15" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question16" class="control-label"></label>
+                <input asp-for="Question16" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question16" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question17" class="control-label"></label>
+                <input asp-for="Question17" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question17" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question18" class="control-label"></label>
+                <input asp-for="Question18" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question18" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question19" class="control-label"></label>
+                <input asp-for="Question19" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question19" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question20" class="control-label"></label>
+                <input asp-for="Question20" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question20" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question21" class="control-label"></label>
+                <input asp-for="Question21" class="form-control" type="number" min="1" max="5" />
+                <span asp-validation-for="Question21" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

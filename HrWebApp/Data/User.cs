@@ -17,6 +17,8 @@ public partial class User
 
     public virtual ICollection<Company> Companies { get; set; } = new List<Company>();
 
+    public virtual ICollection<PersonalityTest> PersonalityTests { get; set; } = new List<PersonalityTest>();
+
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 
     public virtual UserCategory? UserCategory { get; set; }

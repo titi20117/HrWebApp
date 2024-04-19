@@ -31,12 +31,12 @@ namespace HrWebApp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("FormStudent", "Student");
+                    return RedirectToAction("FormTestPersonality", "Student");
                 }
 
                 if (!temp)
                 {
-                    return RedirectToAction("FormStudent", "Student");
+                    return RedirectToAction("FormTestPersonality", "Student");
                 }
 
                 var studentPageList = (from s in resource.Students
@@ -64,7 +64,30 @@ namespace HrWebApp.Controllers
                 vm.Skills = new List<Skill>();
                 vm.Educations = new List<Education>();
                 vm.Languages = new List<Language>();
-                vm.Vacancies = new List<Vacancy>();
+                vm.Vacancies = new List<GetJobModel>();
+
+                var jobList = from j in studentPageList.Vacancies
+                              join c in resource.Companies on j.CompanyId equals c.CompanyId
+                              join t in resource.Contracts on j.ContractId equals t.ContractId
+                              select new
+                              {
+                                  CompanyName = c.CompanyName,
+                                  JobTitle = j.Title,
+                                  JobContract = t.ContractTitle,
+                                  JobLocation = c.CompanyLocation,
+                                  DatePublication = j.PublicationDate
+                              };
+
+                foreach (var job in jobList)
+                {
+                    var vm1 = new GetJobModel();
+                    vm1.CompanyName = job.CompanyName;
+                    vm1.JobTitle = job.JobTitle;
+                    vm1.JobContract = job.JobContract;
+                    vm1.JobLocation = job.JobLocation;
+                    vm1.PublicationTime = job.DatePublication;
+                    vm.Vacancies.Add(vm1);
+                }
 
                 foreach (var item in studentPageList.Skills)
                 {
@@ -74,10 +97,7 @@ namespace HrWebApp.Controllers
                 {
                     vm.Languages.Add(item);
                 }
-                foreach (var item in studentPageList.Vacancies)
-                {
-                    vm.Vacancies.Add(item);
-                }
+
                 foreach (var item in studentPageList.Educations)
                 {
                     vm.Educations.Add(item);
@@ -171,6 +191,47 @@ namespace HrWebApp.Controllers
             }
             return RedirectToAction("Account", "Student");
         }
+
+        public IActionResult FormTestPersonality()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ValidTest(PersonalityTestModel vm)
+        {
+            using (var resource = new HrProjectContext())
+            {
+                PersonalityTest test = new PersonalityTest();
+                test.PersonalityTestQuestion1 = vm.Question1;
+                test.PersonalityTestQuestion2 = vm.Question2;
+                test.PersonalityTestQuestion3 = vm.Question3;
+                test.PersonalityTestQuestion4 = vm.Question4;
+                test.PersonalityTestQuestion5 = vm.Question5;
+                test.PersonalityTestQuestion6 = vm.Question6;
+                test.PersonalityTestQuestion7 = vm.Question7;
+                test.PersonalityTestQuestion8 = vm.Question8;
+                test.PersonalityTestQuestion9 = vm.Question9;
+                test.PersonalityTestQuestion10 = vm.Question10;
+                test.PersonalityTestQuestion11 = vm.Question11;
+                test.PersonalityTestQuestion12 = vm.Question12;
+                test.PersonalityTestQuestion13 = vm.Question13;
+                test.PersonalityTestQuestion14 = vm.Question14;
+                test.PersonalityTestQuestion15 = vm.Question15;
+                test.PersonalityTestQuestion16 = vm.Question16;
+                test.PersonalityTestQuestion17 = vm.Question17;
+                test.PersonalityTestQuestion18 = vm.Question18;
+                test.PersonalityTestQuestion19 = vm.Question19;
+                test.PersonalityTestQuestion20 = vm.Question20;
+                test.PersonalityTestQuestion21 = vm.Question21;
+                test.UserId = FromData.GetUserId(User.Identity.Name);
+
+                resource.PersonalityTests.Add(test);
+                resource.SaveChanges();
+            }
+            return RedirectToAction("FormStudent", "Student");
+        }
+
         public IActionResult UpdateAccount()
         {
             return RedirectToAction("Account", "Student");

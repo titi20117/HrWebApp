@@ -27,8 +27,6 @@ public partial class Student
 
     public double EducationAverageScore { get; set; }
 
-    public virtual ICollection<PersonalityTest> PersonalityTests { get; set; } = new List<PersonalityTest>();
-
     public virtual ICollection<StudentStatistic> StudentStatistics { get; set; } = new List<StudentStatistic>();
 
     public virtual StudentStatus StudentStatus { get; set; } = null!;

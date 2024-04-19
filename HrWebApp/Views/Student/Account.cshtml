@@ -1,6 +1,48 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model HrWebApp.Models.StudentModel
+
 @{
+    ViewData["Title"] = "Student Account";
 }
+
+<div class="student-account">
+    <div class="student-account_names">
+        <div>@Model.FirstName</div>
+        <div>@Model.LastName</div>
+    </div>
+    <div>@Model.PhoneNumber</div>
+    <div>@Model.GitHubProfile</div>
+    <div class="student-account_experience">
+        <div>@Model.WorkExperience</div>
+        <div>@Model.NumberOfProjects</div>
+    </div>
+    <div class="student-account_educations">
+        @foreach (var item in Model.Educations)
+        {
+            <div>@item.EducationName</div>
+        }
+    </div>
+    <div class="student-account_skills">
+        @foreach (var item in Model.Skills)
+        {
+            <div>@item.SkillName</div>
+        }
+    </div>
+    <div class="student-account_languages">
+        @foreach (var item in Model.Languages)
+        {
+            <div>@item.LanguageName</div>
+        }
+    </div>
+    <div class="student-account_jobs">
+        @foreach (var item in Model.Vacancies)
+        {
+            <h3>@item.CompanyName</h3>
+            <h4>@item.JobTitle</h4>
+            <div>
+                <div><span>@item.JobContract</span></div>
+                <div><span>@item.JobLocation</span></div>
+            </div>
+            <div><span>@item.PublicationTime</span></div>
+        }
+    </div>
+</div>

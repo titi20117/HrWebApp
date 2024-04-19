@@ -44,6 +44,6 @@ namespace HrWebApp.Models
         public List<Language>? Languages { get; set; }
         public List<Skill>? Skills { get; set; }
         public List<Education>? Educations { get; set; }
-        public List<Vacancy>? Vacancies { get; set; }
+        public List<GetJobModel>? Vacancies { get; set; }
     }
 }

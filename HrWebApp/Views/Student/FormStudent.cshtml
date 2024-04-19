@@ -96,8 +96,8 @@
                 <div class="form_student_profile">
                     <div class="col-md">
                         <div class="form-group ">
-                            <label asp-for="Languages" class="control-label"></label>
-                            <select asp-for="Languages" asp-items="@(new SelectList(Model.Languages, nameof(Language.LanguageId), nameof(Language.LanguageName)))" multiple class="js-example-basic-multiple form-select">
+                            <label asp-for="LanguagesId" class="control-label"></label>
+                            <select asp-for="LanguagesId" asp-items="@(new SelectList(Model.Languages, nameof(Language.LanguageId), nameof(Language.LanguageName)))" multiple class="js-example-basic-multiple form-select">
                                 <option>
                                     Choose an option
                                 </option>
