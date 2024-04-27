@@ -1,0 +1,77 @@
+﻿@model HrWebApp.Models.GetJobModel
+
+@{
+    ViewData["Title"] = "Model.";
+}
+
+<div class="Job-Page">
+    <div class="Job-Page_jobTitle">
+        <h2>@Model.JobTitle</h2>
+        <div>
+            <span>@Model.JobContract</span>
+            <span>@Model.JobLocation</span>
+        </div>
+    </div>
+    <div class="Job-Page_jobCompany">
+        <a asp-controller="Home" asp-action="CompanyPage" asp-route-id="@Model.CompanyId">
+            <h4>@Model.CompanyName</h4>
+        </a>
+        <div>@Model.CompanyNbrEmployees employees</div>
+    </div>
+    <div class="Job-Page_jobPublicationDate">Published on @Model.PublicationTime</div>
+    <a asp-controller="Home" asp-action="ApplyJob" asp-route-id="@Model.JobId">
+        <span>Apply</span>
+    </a>
+    <div class="Job-Page_jobDetails">
+        <div>
+            <h6>Start date</h6>
+            <span>As soon as possible</span>
+        </div>
+        <div>
+            <h6>Study level</h6>
+            <span>@Model.StudyLevel or equivalent</span>
+        </div>
+        <div>
+            <h6>Experience</h6>
+            <span>@Model.WorkingExperience year(s)</span>
+        </div>
+        <div>
+            <h6>Working hours</h6>
+            <span>@Model.WorkingHours h/week</span>
+        </div>
+        <div>
+            <h6>Salary</h6>
+            <span>@Model.Salary $/h</span>
+        </div>
+        <div>
+            <h6>Remote working</h6>
+            @if (Model.JobContract.ToLower() == "remote")
+            {
+                <span>Remote</span>
+
+            }
+            else
+            {
+                <span>No remote work</span>
+            }
+        </div>
+    </div>
+    <div class="Job-Page_jobInformations">
+        <h5>Skills</h5>
+        <ul>
+            @foreach(var item in Model.Skills)
+            {
+                <li>@item.SkillName</li>
+            }
+        </ul>
+        <h5>Responsibilities</h5>
+        <ul>
+            @foreach(var item in Model.Responsibilities)
+            {
+                <li>@item</li>
+            }
+        </ul>
+        <h5>Description</h5>
+        <div>@Model.Description</div>
+    </div>
+</div>

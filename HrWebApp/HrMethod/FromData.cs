@@ -1,4 +1,5 @@
-﻿using HrWebApp.Data;
+﻿using HrWebApp.Controllers;
+using HrWebApp.Data;
 
 namespace HrWebApp.HrMethod
 {
@@ -14,6 +15,19 @@ namespace HrWebApp.HrMethod
                           select element.UserId).Single();
             }
             return userId;
+        }
+
+        public static string GetUserCategory(string? userMail)
+        {
+            string userCategory = "";
+            using (var resource = new HrProjectContext())
+            {
+                int userCategoryId = (int)(from element in resource.Users
+                          where element.UserEmail == userMail
+                          select element.UserCategoryId).Single();
+                userCategory = ProfilesController.getCategoryUser(userCategoryId);
+            }
+            return userCategory;
         }
     }
 }

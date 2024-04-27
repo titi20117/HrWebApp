@@ -1,0 +1,56 @@
+﻿@model HrWebApp.Models.GetCompanyModel
+
+@{
+}
+<div class="CompanyPage">
+    <div>@Model.Name</div>
+    <div>@Model.Description</div>
+    <div>
+        <a href="@Model.CompanyUrl">Visit the website</a>
+    </div>
+    <div>
+        <div>
+            <div>
+                <span>Company type</span><br/>
+                <span>@Model.Type</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <span>Sector</span><br />
+                <span>@Model.CompanySector</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>Inside the company</div>
+        <div>
+            <span>Creation year</span><br/>
+            <span><b>@Model.CompanyDateOfCreation</b></span>
+        </div>
+        <div>
+            <span>Location</span><br />
+            <span><b>@Model.CompanyLocation</b></span>
+        </div>
+        <div>
+            <span>Employees</span><br />
+            <span><b>@Model.EmployeesCount Employees</b></span>
+        </div>
+    </div>
+    <div class="recruiter-company_body_jobs">
+        @foreach (var item in Model.Jobs)
+        {
+            <a asp-controller="Home" asp-action="JobPage" asp-route-id="@item.JobId">
+                <div class="recruiter-company_body_jobs_element">
+                    <h3>@item.CompanyName</h3>
+                    <h4>@item.JobTitle</h4>
+                    <div>
+                        <div><span>@item.JobContract</span></div>
+                        <div><span>@item.JobLocation</span></div>
+                    </div>
+                    <div><span>@item.PublicationTime</span></div>
+                </div>
+            </a>
+        }
+    </div>
+</div>

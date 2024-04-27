@@ -18,7 +18,7 @@ builder.Services.AddAuthorization(options =>
         policy => policy.RequireClaim("UserCategory", "Recruiter"));
 
     options.AddPolicy("RecruiterAndStudentOnly",
-        policy => policy.RequireClaim("UserCategory", "Recruiter").RequireClaim("UserCategory", "Recruiter"));
+        policy => policy.RequireClaim("UserCategory", "Recruiter").RequireClaim("UserCategory", "Student"));
 });
 // Add middlewares 
 builder.Services.AddControllersWithViews();

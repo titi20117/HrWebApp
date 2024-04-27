@@ -36,3 +36,6 @@ function wrong_pass_alert() {
         alert("Please fill all the fields");
     }
 }
+
+
+//const jobEl = document.get

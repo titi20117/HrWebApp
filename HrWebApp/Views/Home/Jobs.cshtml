@@ -7,15 +7,13 @@
 <div class="recruiter-company_body_jobs">
     @foreach (var item in Model.Jobs)
     {
-        <div class="recruiter-company_body_jobs_element">
-            <h3>@item.CompanyName</h3>
-            <h4>@item.JobTitle</h4>
-            <div>
-                <div><span>@item.JobContract</span></div>
-                <div><span>@item.JobLocation</span></div>
+        <a asp-controller="Home" asp-action="JobPage" asp-route-id="@item.JobId">
+            <div class="recruiter-company_body_jobs_element" id="recruiter-company_body_jobs_element_@item.JobId">
+                <div>@item.CompanyName</div>
+                <h2>@item.JobTitle</h2>
+                <div><span>@item.JobContract</span>  .  <span>@item.JobLocation</span></div>
+                <div><span>@item.PublicationTime</span></div>
             </div>
-            <div><span>@item.PublicationTime</span></div>
-        </div>
-
+        </a>
     }
 </div>

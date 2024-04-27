@@ -31,6 +31,8 @@ public partial class Vacancy
 
     public virtual Contract Contract { get; set; } = null!;
 
+    public virtual Education StudyLevel { get; set; } = null!;
+
     public virtual ICollection<Skill> Skills { get; set; } = new List<Skill>();
 
     public virtual ICollection<StudentStatistic> Statistics { get; set; } = new List<StudentStatistic>();

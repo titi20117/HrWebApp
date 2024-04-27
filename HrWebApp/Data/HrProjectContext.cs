@@ -429,6 +429,11 @@ public partial class HrProjectContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Vacancies__contr__47DBAE45");
 
+            entity.HasOne(d => d.StudyLevel).WithMany(p => p.Vacancies)
+                .HasForeignKey(d => d.StudyLevelId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Vacancies__study__282DF8C2");
+
             entity.HasMany(d => d.Skills).WithMany(p => p.Vacancies)
                 .UsingEntity<Dictionary<string, object>>(
                     "VacancySkill",
