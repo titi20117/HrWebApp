@@ -233,6 +233,11 @@ namespace HrWebApp.Controllers
             return RedirectToAction("Account", "Recruiter");
         }
 
+        public IActionResult Statistics()
+        {
+            return View();
+        }
+
         public IActionResult UpdateJob()
         {
             return View();

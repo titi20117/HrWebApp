@@ -6,43 +6,51 @@
 
 <div class="student-account">
     <div class="student-account_names">
-        <div>@Model.FirstName</div>
-        <div>@Model.LastName</div>
+        <div>@Model.FirstName <b>@Model.LastName</b></div>
     </div>
-    <div>@Model.PhoneNumber</div>
-    <div>@Model.GitHubProfile</div>
+    <div class="student-account_contact>
+        <div>Phone number : @Model.PhoneNumber</div>
+        <div>Github profile: @Model.GitHubProfile</div>
+    </div>
     <div class="student-account_experience">
-        <div>@Model.WorkExperience</div>
-        <div>@Model.NumberOfProjects</div>
+        <div>Experience : @Model.WorkExperience</div>
+        <div>Projects : @Model.NumberOfProjects</div>
     </div>
     <div class="student-account_educations">
+        <div>Educations</div>
         @foreach (var item in Model.Educations)
         {
             <div>@item.EducationName</div>
         }
     </div>
     <div class="student-account_skills">
+        <div>My skills</div>
         @foreach (var item in Model.Skills)
         {
             <div>@item.SkillName</div>
         }
     </div>
     <div class="student-account_languages">
+        <div>Languages</div>
         @foreach (var item in Model.Languages)
         {
             <div>@item.LanguageName</div>
         }
     </div>
+    <hr />
+    <h3>My Jobs</h3>
     <div class="student-account_jobs">
         @foreach (var item in Model.Vacancies)
         {
-            <h3>@item.CompanyName</h3>
-            <h4>@item.JobTitle</h4>
-            <div>
-                <div><span>@item.JobContract</span></div>
-                <div><span>@item.JobLocation</span></div>
+            <div class="student-account_jobs_item">
+                <h3>@item.CompanyName</h3>
+                <h4>@item.JobTitle</h4>
+                <div>
+                    <div><span>@item.JobContract</span></div>
+                    <div><span>@item.JobLocation</span></div>
+                </div>
+                <div><span>@item.PublicationTime</span></div>
             </div>
-            <div><span>@item.PublicationTime</span></div>
         }
     </div>
 </div>

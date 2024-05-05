@@ -1,8 +1,10 @@
 ﻿using HrWebApp.Data;
+using HrWebApp.HrMethod;
 using HrWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 
 namespace HrWebApp.Controllers
@@ -133,7 +135,9 @@ namespace HrWebApp.Controllers
                                WorkingHours = j.WorkingHours,
                                Salary = j.Salary,
                                Description = j.VacancyDescription,
-                               Skills = j.Skills
+                               Skills = j.Skills,
+                               Count = j.Students.Count,
+                               Students = j.Students
                            }).FirstOrDefault(u => u.Id == id);
 
                 vm.JobId = job.Id;
@@ -152,6 +156,15 @@ namespace HrWebApp.Controllers
                 vm.Salary = job.Salary;
                 vm.Description = job.Description;
                 vm.Skills = new List<Skill>();
+                vm.Students = new List<Student>();
+
+                if (job.Students.Count != 0)
+                {
+                    foreach (var student in job.Students)
+                    {
+                        vm.Students.Add(student);
+                    }
+                }
 
                 foreach (var skill in job.Skills)
                 {
@@ -246,6 +259,142 @@ namespace HrWebApp.Controllers
                 }
             }
             return View(vm);
+        }
+
+        public IActionResult ApplyJob(int id)
+        {
+            int studentId = FromData.GetStudentId(User.Identity.Name);
+            Student student = new Student { StudentId = studentId };
+            Vacancy job = new Vacancy { VacancyId = id };
+            using (var resource = new HrProjectContext())
+            {
+                StudentStatistic studentStatistic = new StudentStatistic();
+                resource.Students.Attach(student);
+
+                resource.Vacancies.Attach(job);
+
+                student.Vacancies.Add(job);
+                resource.SaveChanges();
+
+            }
+
+            CaculateStatStudent(studentId, job);
+
+            return RedirectToAction("JobPage", "Home", new {id = id});
+        }
+
+        public void CaculateStatStudent(int studentId, Vacancy myJob)
+        {
+            StudentStatistic studentStatistic = new StudentStatistic();
+            using (var resource = new HrProjectContext())
+            {
+                var student = (from s in resource.Students
+                               select new
+                               {
+                                   StudentId = s.StudentId,
+                                   EducationAverageScore = s.EducationAverageScore,
+                                   StudentAwardsHonors = s.StudentAwardsHonors,
+                                   Skills = s.Skills,
+                                   Educations = s.Educations
+                               }).FirstOrDefault(u => u.StudentId == studentId);
+                var job = (from v in resource.Vacancies
+                           select new
+                           {
+                               VacancyId = v.VacancyId,
+                               StudyLevelId = v.StudyLevelId,
+                               Skills = v.Skills
+                           }
+                           ).FirstOrDefault(u => u.VacancyId == myJob.VacancyId);
+                var testPerson = (from p in resource.PersonalityTests
+                                  select new
+                                  {
+                                      UserId = p.UserId,
+                                      PersonalityTestQuestion1 = p.PersonalityTestQuestion1,
+                                      PersonalityTestQuestion2 = p.PersonalityTestQuestion2,
+                                      PersonalityTestQuestion3 = p.PersonalityTestQuestion3,
+                                      PersonalityTestQuestion4 = p.PersonalityTestQuestion4,
+                                      PersonalityTestQuestion5 = p.PersonalityTestQuestion5,
+                                      PersonalityTestQuestion6 = p.PersonalityTestQuestion6,
+                                      PersonalityTestQuestion7 = p.PersonalityTestQuestion7,
+                                      PersonalityTestQuestion8 = p.PersonalityTestQuestion8,
+                                      PersonalityTestQuestion9 = p.PersonalityTestQuestion9,
+                                      PersonalityTestQuestion10 = p.PersonalityTestQuestion10,
+                                      PersonalityTestQuestion11 = p.PersonalityTestQuestion11,
+                                      PersonalityTestQuestion12 = p.PersonalityTestQuestion12,
+                                      PersonalityTestQuestion13 = p.PersonalityTestQuestion13,
+                                      PersonalityTestQuestion14 = p.PersonalityTestQuestion14,
+                                      PersonalityTestQuestion15 = p.PersonalityTestQuestion15,
+                                      PersonalityTestQuestion16 = p.PersonalityTestQuestion16,
+                                      PersonalityTestQuestion17 = p.PersonalityTestQuestion17,
+                                      PersonalityTestQuestion18 = p.PersonalityTestQuestion18,
+                                      PersonalityTestQuestion19 = p.PersonalityTestQuestion19,
+                                      PersonalityTestQuestion20 = p.PersonalityTestQuestion20,
+                                      PersonalityTestQuestion21 = p.PersonalityTestQuestion21
+                                  }
+                                  ).FirstOrDefault(u => u.UserId == FromData.GetMyUserId(studentId));
+
+                studentStatistic.StudentId = student.StudentId;
+                studentStatistic.EducationScore = student.EducationAverageScore * 0.5;
+                studentStatistic.PersonalityTestScore = (double)(((testPerson.PersonalityTestQuestion1 + testPerson.PersonalityTestQuestion2 +
+                    testPerson.PersonalityTestQuestion3 + testPerson.PersonalityTestQuestion4 +
+                    testPerson.PersonalityTestQuestion5 + testPerson.PersonalityTestQuestion6 +
+                    testPerson.PersonalityTestQuestion7 + testPerson.PersonalityTestQuestion8 +
+                    testPerson.PersonalityTestQuestion9 + testPerson.PersonalityTestQuestion10 +
+                    testPerson.PersonalityTestQuestion11 + testPerson.PersonalityTestQuestion12 +
+                    testPerson.PersonalityTestQuestion13 + testPerson.PersonalityTestQuestion14 +
+                    testPerson.PersonalityTestQuestion15 + testPerson.PersonalityTestQuestion16 +
+                    testPerson.PersonalityTestQuestion17 + testPerson.PersonalityTestQuestion18 +
+                    testPerson.PersonalityTestQuestion19 + testPerson.PersonalityTestQuestion20 +
+                    testPerson.PersonalityTestQuestion21)*20/105)*0.1);
+                if (string.IsNullOrEmpty(student.StudentAwardsHonors))
+                {
+                    studentStatistic.IndividualAchievementsScore = 0.0;
+                }
+                else
+                {
+                    studentStatistic.IndividualAchievementsScore = 2.0;
+                }
+
+                int studentSkillsCount = 0;
+                double skillsPoint = 0.0;
+                int jobSkillsCount = job.Skills.Count;
+                foreach (var item in student.Skills)
+                {
+                    foreach (var item1 in job.Skills)
+                    {
+                        if (item.SkillId == item1.SkillId)
+                        {
+                            studentSkillsCount = studentSkillsCount + 1; break;
+                        }
+                    }
+                }
+                skillsPoint = (studentSkillsCount * 10) / jobSkillsCount;
+
+                double educationPoints = 0.0;
+                foreach (var item in student.Educations)
+                {
+                    if (item.EducationId == job.StudyLevelId)
+                    {
+                        educationPoints = 10.0;
+                        break;
+                    }
+                }
+                studentStatistic.ProfilScore = ((educationPoints + skillsPoint) * 0.5) +
+                    studentStatistic.EducationScore + studentStatistic.PersonalityTestScore +
+                    studentStatistic.IndividualAchievementsScore;
+                
+                resource.StudentStatistics.Add(studentStatistic);
+                resource.SaveChanges();
+
+                resource.StudentStatistics.Attach(studentStatistic);
+
+                Vacancy vacancy = new Vacancy { VacancyId = job.VacancyId };
+                resource.Vacancies.Attach(vacancy);
+                //contraire
+                vacancy.Statistics.Add(studentStatistic);
+                resource.SaveChanges();
+                //studentStatistic.Vacancies.Add(myJob);
+            }
         }
 
         public IActionResult Privacy()

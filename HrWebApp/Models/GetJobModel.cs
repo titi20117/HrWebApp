@@ -20,5 +20,6 @@ namespace HrWebApp.Models
         public string? Description { get; set; }
         public List<Skill>? Skills { get; set; }
         public List<GetJobModel>? Jobs { get; set; }
+        public List<Student>? Students { get; set; }
     }
 }

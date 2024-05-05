@@ -7,6 +7,12 @@ html {
     font-size: 16px;
   }
 }
+.not-active {
+     pointer-events: none;
+     cursor: default;
+     text-decoration: none;
+     color: #000000;
+ }
 
 .btn-link {
     border: none;
@@ -117,9 +123,16 @@ header .component {
 .recruiter-formJob {
     width: 100%;
 }
+
 .recruiter-company_body_jobs {
     margin: auto;
 }
+
+.recruiter-company_body_jobs a {
+    text-decoration: none;
+
+}
+
 .recruiter-company_body_jobs_element {
     border: 1px solid #d5d3d3;
     border-radius: 10px;
@@ -129,6 +142,7 @@ header .component {
     width: 80%;
     cursor: pointer;
     padding: 30px;
+    background-color: rgb(243, 235, 235);
 }
 
     .recruiter-company_body_jobs_element:hover {
@@ -156,4 +170,8 @@ header .component {
 fieldset legend {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
+}
+
+.student-account {
+
 }

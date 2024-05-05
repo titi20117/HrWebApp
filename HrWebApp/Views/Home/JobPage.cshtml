@@ -1,4 +1,5 @@
-﻿@model HrWebApp.Models.GetJobModel
+﻿@using HrWebApp.HrMethod;
+@model HrWebApp.Models.GetJobModel
 
 @{
     ViewData["Title"] = "Model.";
@@ -19,9 +20,29 @@
         <div>@Model.CompanyNbrEmployees employees</div>
     </div>
     <div class="Job-Page_jobPublicationDate">Published on @Model.PublicationTime</div>
-    <a asp-controller="Home" asp-action="ApplyJob" asp-route-id="@Model.JobId">
-        <span>Apply</span>
-    </a>
+    @*disable link if user aready click on the Apply link*@
+    @{  bool temp = false;
+        @foreach(var item in Model.Students)
+        {@if (item.StudentId == FromData.GetStudentId(User.Identity.Name))
+            {
+                temp = true;
+                break;
+            }
+        }
+        @if (temp)
+        {
+            <a asp-controller="Home" asp-action="ApplyJob" asp-route-id="@Model.JobId" class="not-active">
+                <span>Apply</span>
+            </a>
+        }
+        else
+        {
+            <a asp-controller="Home" asp-action="ApplyJob" asp-route-id="@Model.JobId">
+                <span>Apply</span>
+            </a>
+        }
+    }
+
     <div class="Job-Page_jobDetails">
         <div>
             <h6>Start date</h6>

@@ -29,5 +29,28 @@ namespace HrWebApp.HrMethod
             }
             return userCategory;
         }
+
+        public static int GetStudentId(string? userMail)
+        {
+            int studentId = 0;
+            using (var resource = new HrProjectContext())
+            {
+                studentId = (from element in resource.Students
+                          where element.UserId == GetUserId(userMail)
+                          select element.StudentId).Single();
+            }
+            return studentId;
+        }
+        public static int GetMyUserId(int id)
+        {
+            int myUserId = 0;
+            using (var resource = new HrProjectContext())
+            {
+                myUserId = (int)(from element in resource.Students
+                             where element.StudentId == id
+                             select element.UserId).Single();
+            }
+            return myUserId;
+        }
     }
 }
