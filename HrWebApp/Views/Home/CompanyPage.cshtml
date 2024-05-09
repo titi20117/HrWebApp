@@ -3,27 +3,25 @@
 @{
 }
 <div class="CompanyPage">
-    <div>@Model.Name</div>
-    <div>@Model.Description</div>
-    <div>
-        <a href="@Model.CompanyUrl">Visit the website</a>
-    </div>
-    <div>
-        <div>
-            <div>
-                <span>Company type</span><br/>
-                <span>@Model.Type</span>
-            </div>
-        </div>
-        <div>
-            <div>
-                <span>Sector</span><br />
-                <span>@Model.CompanySector</span>
-            </div>
+    <h2>@Model.Name</h2>
+    <div class="CompanyPage_header">
+        <div class="CompanyPage_description">@Model.Description</div>
+        <div class="CompanyPage_url">
+            <a href="@Model.CompanyUrl">Visit the website</a>
         </div>
     </div>
-    <div>
-        <div>Inside the company</div>
+    <div class="CompanyPage_info">
+        <div>
+            <span>Company type</span><br />
+            <span><b>@Model.Type</b></span>
+        </div>
+        <div>
+            <span>Sector</span><br />
+            <span><b>@Model.CompanySector</b></span>
+        </div>
+    </div>
+    <h5>Inside the company</h5>
+    <div class="CompanyPage_insideCompany">
         <div>
             <span>Creation year</span><br/>
             <span><b>@Model.CompanyDateOfCreation</b></span>

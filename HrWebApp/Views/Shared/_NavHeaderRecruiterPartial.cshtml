@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+﻿@using HrWebApp.HrMethod;
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container-fluid actor">
         <a class="navbar-brand" asp-controller="Recruiter" asp-action="Account"><i class="bi bi-house-fill text-primary"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -11,7 +12,7 @@
                     <a class="nav-link text-dark" asp-controller="Recruiter" asp-action="Account">Recruiters</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-controller="Recruiter" asp-action="Statistics">Statistics</a>
+                    <a class="nav-link text-dark" asp-controller="Recruiter" asp-action="Statistics" asp-route-id="@FromData.GetCompanyId(User.Identity.Name)">Statistics</a>
                 </li>
             </ul>
         </div>

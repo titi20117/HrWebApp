@@ -41,6 +41,18 @@ namespace HrWebApp.HrMethod
             }
             return studentId;
         }
+
+        public static int GetCompanyId(string? userMail)
+        {
+            int companyId = 0;
+            using (var resource = new HrProjectContext())
+            {
+                companyId = (from element in resource.Companies
+                             where element.UserId == GetUserId(userMail)
+                             select element.CompanyId).Single();
+            }
+            return companyId;
+        }
         public static int GetMyUserId(int id)
         {
             int myUserId = 0;
@@ -52,5 +64,7 @@ namespace HrWebApp.HrMethod
             }
             return myUserId;
         }
+
+
     }
 }

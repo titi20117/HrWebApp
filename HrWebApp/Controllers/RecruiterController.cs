@@ -232,10 +232,55 @@ namespace HrWebApp.Controllers
             }
             return RedirectToAction("Account", "Recruiter");
         }
-
-        public IActionResult Statistics()
+        /// <summary>
+        /// method show statistics by job on the recruiter dasboard
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <returns>view(statistics)</returns>
+        public IActionResult Statistics(int id)
         {
-            return View();
+            StatisticModel vm = new StatisticModel();
+            vm.Statistics = new List<StatisticModel>();
+            using (var resource =  new HrProjectContext())
+            {
+                var jobCompanyList = (from j in resource.Vacancies
+                                      where (j.CompanyId == id)
+                                      select new
+                                      {
+                                          CompanyId = j.CompanyId,
+                                          VacancyId = j.VacancyId,
+                                          JobTitle = j.Title,
+                                          Statistics = j.Statistics
+                                      }).ToList();
+
+               
+                foreach (var item in jobCompanyList)
+                {
+                    StatisticModel vm1 = new StatisticModel();
+                    vm1.StudInfos = new List<StatisticModel>();
+                    var statList = (from s in item.Statistics
+                                 join student in resource.Students on s.StudentId equals student.StudentId
+                                 select new
+                                 {
+                                     StudentId = s.StudentId,
+                                     StudentName = student.StudentFirstName + " " + student.StudentLastName,
+                                     StudentPhoneNumber = student.StudentPhoneNumber,
+                                     StudentProfilScore = s.ProfilScore
+                                 }).ToList();
+                    vm1.VacancyId = item.VacancyId;
+                    vm1.VacancyTitle = item.JobTitle;
+                    foreach (var item1 in statList)
+                    {
+                        StatisticModel vm2 = new StatisticModel();
+                        vm2.StudentName = item1.StudentName;
+                        vm2.StudentPhoneNumber = item1.StudentPhoneNumber;
+                        vm2.StudentProfilScore = item1.StudentProfilScore;
+                        vm1.StudInfos.Add(vm2);
+                    }
+                    vm.Statistics.Add(vm1);
+                }
+            }
+            return View(vm);
         }
 
         public IActionResult UpdateJob()

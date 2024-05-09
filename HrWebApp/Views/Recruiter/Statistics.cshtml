@@ -1,0 +1,29 @@
+﻿@model HrWebApp.Models.StatisticModel
+
+@{
+    ViewData["Title"] = "Statistics";
+}
+
+@foreach(var item in Model.Statistics)
+{
+    <table class="table caption-top">
+        <caption>@item.VacancyTitle</caption>
+        <thead>
+            <tr>
+                <th scope="col">Student</th>
+                <th scope="col">Profil Score</th>
+                <th scope="col">Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item1 in item.StudInfos)
+            {
+                <tr>
+                    <td>@item1.StudentName</td>
+                    <td>@item1.StudentProfilScore</td>
+                    <td>@item1.StudentPhoneNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

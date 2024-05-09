@@ -71,6 +71,7 @@ namespace HrWebApp.Controllers
                               join t in resource.Contracts on j.ContractId equals t.ContractId
                               select new
                               {
+                                  JobId = j.VacancyId,
                                   CompanyName = c.CompanyName,
                                   JobTitle = j.Title,
                                   JobContract = t.ContractTitle,
@@ -81,6 +82,7 @@ namespace HrWebApp.Controllers
                 foreach (var job in jobList)
                 {
                     var vm1 = new GetJobModel();
+                    vm1.JobId = job.JobId;
                     vm1.CompanyName = job.CompanyName;
                     vm1.JobTitle = job.JobTitle;
                     vm1.JobContract = job.JobContract;

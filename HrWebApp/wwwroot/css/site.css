@@ -111,9 +111,14 @@ header .component {
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.companies-content a {
+    text-decoration: none;
+}
 .companies-content_element {
     margin: 20px;
     width: 400px;
+    height: 100%;
 }
 .companies-content_element_footer::before {
     content: "\f170";
@@ -124,34 +129,103 @@ header .component {
     width: 100%;
 }
 
-.recruiter-company_body_jobs {
+.recruiter-company {
+
+}
+
+.recruiter-company_header {
+
+}
+
+.recruiter-company_header_title a {
+    margin: 10px 0px 20px;
+    font-weight: bolder;
+}
+
+.CompanyPage_header {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.CompanyPage_header .CompanyPage_description {
+    width: 70%;
+}
+
+.CompanyPage_header .CompanyPage_url {
     margin: auto;
 }
 
-.recruiter-company_body_jobs a {
+.CompanyPage_url a {
     text-decoration: none;
-
+    border-radius: 5px;
+    background-color: rgb(24, 116, 10);
+    color: #fff;
+    font-size: 20px;
+    padding: 10px;
+    font-style: italic;
 }
 
-.recruiter-company_body_jobs_element {
+.recruiter-company_header_description, .CompanyPage_insideCompany, .CompanyPage_info, .Job-Page-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(64, 62, 62);
+    border: 1px solid #0d74f3;
+    border-radius: 15px;
+    padding: 15px 30px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.recruiter-company_body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.recruiter-company_body_description, .CompanyPage_description {
+    background-color: rgb(243, 235, 235);
+    color: #000;
+    font-weight: 400;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 50%;
+    padding: 30px;
+    height: 300px;
+    overflow: auto;
+}
+
+.recruiter-company_body_jobs, .student-account_jobs {
+margin: auto;
+}
+
+    .recruiter-company_body_jobs a, .student-account_jobs a {
+        text-decoration: none;
+    }
+
+.recruiter-company_body_jobs_element, .student-account_jobs_item {
     border: 1px solid #d5d3d3;
     border-radius: 10px;
     margin-top: 20px;
-    margin-left:10%;
-    margin-right:10%;
+    margin-left: 10%;
+    margin-right: 10%;
     width: 80%;
     cursor: pointer;
     padding: 30px;
     background-color: rgb(243, 235, 235);
 }
 
-    .recruiter-company_body_jobs_element:hover {
+    .recruiter-company_body_jobs_element:hover, .student-account_jobs_item:hover {
         background-color: #b6ff00;
     }
 
 .recruiter-company_body_jobs_element div:nth-child(n+1) {
     color: #808080;
     font-size: 14px;
+}
+
+.Job-Page_jobInformations div:nth-child(3) {
+    width:70%;
 }
 
 .recruiter-company_body_jobs_element div:nth-child(4) {
@@ -175,3 +249,36 @@ fieldset legend {
 .student-account {
 
 }
+
+.student-account_content, .Job-Page_jobInformations, .Job-Page_jobDetails {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    background-color: rgb(64, 62, 62);
+    margin: 20px;
+    border-radius: 15px;
+    padding: 15px 20px;
+}
+
+.Job-Page_jobInformations {
+
+}
+
+.Job-Page_link {
+    margin: 20px;
+}
+
+.Job-Page_link a {
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: rgb(24, 116, 10);
+    color: #fff;
+    font-size: 20px;
+    padding: 10px;
+    font-style: italic;
+    width: 5%;
+}
+
+.Job-Page_jobCompany {
+}
+
